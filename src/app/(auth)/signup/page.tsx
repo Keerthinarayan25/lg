@@ -3,7 +3,7 @@
 import { useForm } from "react-hook-form";
 import { useActionState } from "react";
 import { signup } from "@/actions/signup";
-
+import { redirect } from "next/navigation";
 
 type SignupFormData = {
   name: string;
@@ -19,19 +19,12 @@ export default function SignupPage() {
 
   const {
     register,
-    handleSubmit,
     formState: { errors },
   } = useForm<SignupFormData>();
 
-
-  const onSubmit = (data: SignupFormData) => {
-    const formData = new FormData();
-    formData.append("name", data.name);
-    formData.append("email", data.email);
-    formData.append("password", data.password);
-    formAction(formData);
-  };
-
+  if (state.success ) {
+    redirect("/");
+  }
 
 
   return (
@@ -43,7 +36,7 @@ export default function SignupPage() {
           you already have one, please sign in instead.
         </p>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        <form action={formAction}  className="space-y-6">
 
 
           <div>
@@ -97,7 +90,7 @@ export default function SignupPage() {
                   required: "Password is required",
                   minLength: {
                     value: 8,
-                    message: "Minimum 6 characters required",
+                    message: "Minimum 8 characters required",
                   },
                 })}
                 className="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-red-600 outline-none"
@@ -133,7 +126,7 @@ export default function SignupPage() {
               className={`${isPending ? "bg-pink-400" : "bg-pink-600 hover:bg-pink-700"
                 } text-white font-semibold px-6 py-2 rounded-md transition`}
               disabled={isPending}
-              // onClick={() => redirectToLogin()}
+
             >
               {isPending ? "Signing up..." : "SIGN UP"}
             </button>

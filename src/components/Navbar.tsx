@@ -1,8 +1,10 @@
-import { Search, ShoppingCart, User } from "lucide-react";
+import { Search, ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import UserSection from "./navbar/userSection";
 
 export default function Navbar() {
+
   return (
     <nav className="border-b border-gray-200  bg-[#f0ece4]">
       <div className="container mx-auto px-4">
@@ -25,10 +27,8 @@ export default function Navbar() {
 
           <div className="flex  items-center justify-between gap-10 h-14 font-medium">
             <Search />
-            <button className="hover:text-black transition">
-              <User />
-            </button>
-
+            <UserSection/>
+            
             <Link href="/checkout">
               <ShoppingCart />
             </Link>

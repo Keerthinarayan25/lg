@@ -21,7 +21,7 @@ Promise<{success:boolean; error?:string}> {
     };
   }
   
-  if(password.length  < 6){
+  if(password.length  < 8){
     return {
       success: false,
       error: "Password must be at least 6 characters long",
@@ -43,13 +43,21 @@ Promise<{success:boolean; error?:string}> {
     const response = await fetch(`${BACKEND_URL}/v1/signup`,{
       method:"POST",
       headers: {
-        "content-Type":"application/json",
+        "Content-Type":"application/json",
         "x-api-key":API_KEY,
       },
       body: JSON.stringify({name, email,password}),
     });
 
     const data = await response.json();
+
+    // console.log("SIGNUP RESPONSE STATUS:", response.status);
+    // console.log("SIGNUP RESPONSE BODY:", data);
+
+    // console.log("ERROR DETAILS:", JSON.stringify(data, null, 2));
+
+    // console.log("ISSUES:", data.errors?.issues);
+
     
     if (!response.ok) {
       if (response.status === 409 || data?.message?.includes("exists")) {
@@ -99,9 +107,8 @@ Promise<{success:boolean; error?:string}> {
     }
     
     return {
-      success: true,
-
-    };
+      success:true
+    }
 
     
   } catch (error:unknown) {
@@ -115,6 +122,6 @@ Promise<{success:boolean; error?:string}> {
 
 }
 
-export async function redirectToLogin(next:string){
-  redirect(`/signin${next ? `?next=${encodeURIComponent(next)}` : ""}`);
+export async function redirectToLogin(){
+  redirect("/signin");
 }
