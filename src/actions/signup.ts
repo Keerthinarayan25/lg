@@ -24,7 +24,7 @@ Promise<{success:boolean; error?:string}> {
   if(password.length  < 8){
     return {
       success: false,
-      error: "Password must be at least 6 characters long",
+      error: "Password must be at least 8 characters long",
     };
   }
 

@@ -25,7 +25,10 @@ export default function SigninPage() {
     redirect("/")
   }
 
+  const redirectLogin =()=> {
+    redirect("/signup");
 
+  }
 
 
   return (
@@ -98,7 +101,7 @@ export default function SigninPage() {
 
         <div className="p-10 bg-[#f8f8f8]">
           <h2 className="text-xl font-semibold mb-5">Dont have an Account?</h2>
-          <button 
+          <button onClick={() => redirectLogin()}
             className="bg-[#a50034] text-white px-5 py-2 rounded-md hover:bg-red-800 transition w-full mb-8 font-semibold"
           >
             SIGN UP</button>
