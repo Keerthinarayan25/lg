@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Star, Truck, MapPin } from "lucide-react";
 import { useState } from "react";
-import { Product } from "@/types/product";
+import { Product } from "@/types/productTypes";
 
 // local types for variants
 type Variant = {

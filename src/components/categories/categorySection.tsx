@@ -4,17 +4,17 @@ import { Carousel, CarouselContent, CarouselItem } from "../ui/carousel";
 import Link from "next/link";
 
   const categories = [
-    { name: "Air Care", image: "/aircare/image.png" },
+    { name: "Air purifiers", image: "/aircare/image.png" },
     { name: "Air Conditioner", image: "/airConditioner/image.png" },
     { name: "Cooking", image: "/cooking/image.png" },
     { name: "Dish Washer", image: "/dishwasher/image.png" },
     { name: "Earbuds", image: "/earbuds/image.png" },
-    { name: "Laptops", image: "/laptop/image.png" },
+    { name: "Laptop", image: "/laptop/image.png" },
     { name: "Laundry", image: "/laundry/image.png" },
-    { name: "monitor", image: "/monitor/image.png" },
+    { name: "Monitor", image: "/monitor/image.png" },
     { name: "Refrigerators", image: "/refrigerators/image.png" },
     { name: "Soundbaars", image: "/soundbars/image.png" },
-    { name: "OLED TV", image: "/TVs/image.png" },
+    { name: "Tv", image: "/TVs/image.png" },
     { name: "Vacuums", image: "/vacuums/image.png" }
 
   ]
