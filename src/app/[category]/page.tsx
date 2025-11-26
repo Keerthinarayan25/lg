@@ -44,7 +44,7 @@ export default async function ProductsPage({ params }: { params : Promise<Produc
           {filteredProducts.map((product:Product) => (
             <Link
               key={product.id}
-              href={`/${category}/${product.name}`}
+              href={`/${category}/${product.id}`}
               className="block"
             >
               <ProductCard {...product} />

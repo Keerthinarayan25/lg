@@ -1,8 +1,18 @@
-export interface Variant {
+export type Variant = {
+  id: string;
+  sku: string;
   price: number;
   stock: number;
-  discount: number;
-}
+  discount: number;        // number, not string
+  unit: string;
+  quantity: number;
+  isDefault: boolean;
+  position: number;
+  barcode: string | null;
+  createdAt: string;
+  updatedAt: string;
+  productId: string;
+};
 
 export type Product = {
   id: string;

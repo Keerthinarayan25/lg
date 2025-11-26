@@ -73,3 +73,39 @@ export async function getProductsCategory(category:string) {
     }
   }
 }
+
+export async function getProductById(productId:string){
+  try {
+
+    const response = await fetch(`${BACKEND_URL}/v1/products/${productId}`, {
+      method: "GET",
+      headers: {
+        'x-api-key': API_KEY,
+      },
+      cache: "no-store",
+      next: {
+        tags: ["products"],
+      }
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+
+      return {
+        success: false,
+        status: response.status,
+        error: errorData.message || `Server error: ${response.status}`,
+      };
+    }
+
+    return response.json();
+
+  } catch (error: unknown) {
+    console.error("error fetching products:", error);
+    return {
+      success: false,
+      errro: "Failed to fetch products",
+    }
+  }
+  
+}
