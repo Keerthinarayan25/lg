@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { ShoppingCart, Eye } from "lucide-react";
 import { Product } from "@/types/productTypes";
+import AddtoCartButton from "../cart/AddtoCartButton";
 
 export default function ProductCard(product: Product) {
   const [hovered, setHovered] = useState(false);
@@ -23,7 +24,7 @@ export default function ProductCard(product: Product) {
         relative bg-white rounded-2xl shadow-md 
         overflow-hidden transition-all duration-500 
         hover:shadow-2xl hover:-translate-y-2 group
-        w-full ${ hovered ? "h-[460px]" : "h-[390px]"}
+        w-full ${ hovered ? "h-[480px]" : "h-[390px]"}
       `}
     >
       {/* Product Image */}
@@ -82,13 +83,7 @@ export default function ProductCard(product: Product) {
       `}
       >
         <div className="flex justify-center gap-3">
-          <button className="px-4 py-2 text-sm font-medium bg-[#ea1917] text-white rounded-xl hover:bg-white hover:text-black border transition">
-            Add to Cart
-          </button>
-
-          <button className="px-4 py-2 text-sm font-medium border border-gray-300 rounded-xl hover:bg-gray-100 transition">
-            View
-          </button>
+          <AddtoCartButton/>
         </div>
       </div>
     </div>

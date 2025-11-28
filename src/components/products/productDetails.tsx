@@ -3,12 +3,13 @@
 import Image from "next/image";
 import { Truck, MapPin } from "lucide-react";
 import { Product, Variant } from "@/types/productTypes";
+import AddtoCartButton from "../cart/AddtoCartButton";
 
 
 
 export default function ProductDetails({ product }: { product: Product }) {
 
-  console.log("Product:", product);
+  // console.log("Product:", product);
 
   const variant: Variant | null =
     product.variants?.find((v) => v.isDefault) ??
@@ -54,10 +55,7 @@ export default function ProductDetails({ product }: { product: Product }) {
             </span>
           )}
 
-          {/* CTA */}
-          <button className="px-6 py-3 bg-red-600 text-white rounded-full font-semibold hover:bg-red-700 transition mt-3">
-            Add to Cart
-          </button>
+          <AddtoCartButton/>
         </div>
       </div>
 
@@ -96,16 +94,8 @@ export default function ProductDetails({ product }: { product: Product }) {
 function ProductInfo({ description }: { description?: string }) {
   return (
     <div>
-      <h3 className="text-xl font-semibold mb-3">Key Features</h3>
+      <h3 className="text-xl font-semibold mb-3">Description</h3>
 
-      {/* Hardcode or populate later */}
-      <ul className="list-disc list-inside text-gray-700 space-y-2 mb-6">
-        <li>Free Demo Available</li>
-        <li>Free Delivery</li>
-        <li>Return Available</li>
-      </ul>
-
-      <h4 className="text-xl font-semibold">Description</h4>
       <p className="text-gray-700 leading-relaxed">{description}</p>
     </div>
   );
@@ -184,7 +174,6 @@ function ProductSummary({
         <div className="text-red-600 space-y-2">
           <p className="font-semibold text-sm flex items-center gap-1">
             Total Savings (1)
-            
             <span className="ml-auto">₹{savings}</span>
           </p>
 
@@ -192,14 +181,12 @@ function ProductSummary({
 
           <div className="flex justify-between text-sm font-medium text-gray-900">
             <span>Product Discount(s)</span>
-            <span className="text-red-600">{savings}</span>
+            <span className="text-red-600">₹{savings}</span>
           </div>
         </div>
       )}
 
-      <button className="w-full bg-red-600 text-white rounded-full py-3 font-semibold text-lg hover:bg-red-700 transition">
-        Add to Cart
-      </button>
+      <AddtoCartButton/>
     </div>
   );
 }

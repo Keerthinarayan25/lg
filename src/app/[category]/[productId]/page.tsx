@@ -5,14 +5,16 @@ import { getProductById } from "@/actions/product";
 export default async function ProductDetailsPage({
   params,
 }: {
-  params: {  slug: string,productId: string };
+  params: {  category: string,productId: string };
 }) {
-  const { slug, productId } = await params;
+  const { category, productId } = await params;
 
-  const product = await getProductById(productId);
-  console.log("SLUG:",slug);
+  const items = await getProductById(productId);
+  const product = items.data;
+  console.log("SLUG:",category);
+  console.log("Data in details page:", items);
 
-  if (!product)
+  if (!items)
     return <div className="p-8 text-red-600 text-center">Product not found.</div>;
 
   return (
@@ -22,13 +24,13 @@ export default async function ProductDetailsPage({
         <nav className="flex items-center space-x-1 text-sm text-gray-700">
           <Link href="/" className="hover:underline">Home</Link>
           <span className="text-gray-500">/</span>
-          <Link href={`/${slug}`} className="hover:underline capitalize">{product.data.category}</Link>
+          <Link href={`/${category}`} className="hover:underline capitalize">{category}</Link>
           <span className="text-gray-500">/</span>
-          <span className="font-semibold text-gray-900">{product.data.name}</span>
+          <span className="font-semibold text-gray-900">{product.name}</span>
         </nav>
       </div>
 
-      <ProductDetails product={product.data} />
+      <ProductDetails product={product} />
     </div>
   );
 }
