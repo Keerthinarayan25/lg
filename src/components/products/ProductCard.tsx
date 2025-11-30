@@ -3,18 +3,21 @@ import Image from "next/image";
 import { useState } from "react";
 import { ShoppingCart, Eye } from "lucide-react";
 import { Product } from "@/types/productTypes";
-import AddtoCartButton from "../cart/AddtoCartButton";
+// import AddtoCartButton from "../cart/AddtoCartButton";
+import Link from "next/link";
 
 export default function ProductCard(product: Product) {
   const [hovered, setHovered] = useState(false);
 
-  console.log("In product card page:",product);
-
-  const variant = product.variants?.[0] ?? { price: 0, discount: 0 };
+  console.log("In product card page:", product);
+  
+  const variant = product.variants?.find(v => v.isDefault) || product.variants?.[0] || { price: 0, discount: 0 };
+  
+  console.log("Variants are :", variant);
   const price = variant?.price ?? 0;
   const discount = variant?.discount ?? 0;
 
-  const discountedPrice = price - (price *  discount) / 100;
+  const discountedPrice = price - (price * discount) / 100;
 
   return (
     <div
@@ -24,7 +27,7 @@ export default function ProductCard(product: Product) {
         relative bg-white rounded-2xl shadow-md 
         overflow-hidden transition-all duration-500 
         hover:shadow-2xl hover:-translate-y-2 group
-        w-full ${ hovered ? "h-[480px]" : "h-[390px]"}
+        w-full ${hovered ? "h-[480px]" : "h-[390px]"}
       `}
     >
       {/* Product Image */}
@@ -54,7 +57,13 @@ export default function ProductCard(product: Product) {
       {/* Product Info */}
       <div className="p-4 text-center">
         <h3 className="font-semibold text-gray-900 text-base md:text-lg line-clamp-2">
-          {product.name}
+          <Link
+            key={product.id}
+            href={`/${product.category}/${product.id}`}
+            className="block"
+          >
+            {product.name}
+          </Link>
         </h3>
 
         <div className="my-2">
@@ -63,7 +72,7 @@ export default function ProductCard(product: Product) {
           </span>
 
           <span className="text-red-500 text-xs md:text-sm ml-2 font-semibold">
-            {discount }% OFF
+            {discount}% OFF
           </span>
 
           <div>
@@ -83,7 +92,11 @@ export default function ProductCard(product: Product) {
       `}
       >
         <div className="flex justify-center gap-3">
-          <AddtoCartButton/>
+          {/* <AddtoCartButton
+            productId={product.id}
+          // productName = {product.name}
+            productVariant = {variant}
+          /> */}
         </div>
       </div>
     </div>

@@ -9,12 +9,13 @@ import AddtoCartButton from "../cart/AddtoCartButton";
 
 export default function ProductDetails({ product }: { product: Product }) {
 
-  // console.log("Product:", product);
-
+  // console.log("Product variants:", product.variants);
+  
   const variant: Variant | null =
-    product.variants?.find((v) => v.isDefault) ??
-    product.variants?.[0] ??
-    null;
+  product.variants?.find((v) => v.isDefault) ??
+  product.variants?.[0] ??
+  null;
+  console.log("PRoduct ID:", variant);
 
   const price = variant?.price ?? 0;
   const discount = variant?.discount ?? 0;
@@ -55,7 +56,9 @@ export default function ProductDetails({ product }: { product: Product }) {
             </span>
           )}
 
-          <AddtoCartButton/>
+          <AddtoCartButton 
+            productId = {product.id}
+            productVariant={variant!}/>
         </div>
       </div>
 
@@ -64,24 +67,23 @@ export default function ProductDetails({ product }: { product: Product }) {
 
         {/* LEFT IMAGE GALLERY */}
         <div className="md:w-1/2 sticky top-0 h-screen flex items-center justify-center border-r bg-gray-50">
-          <ProductGallery images={product.images || []} />
+          <ProductGallery images={product.image || []} />
         </div>
 
         {/* RIGHT INFO */}
         <div className="md:w-1/2 overflow-y-auto p-8 space-y-12">
           <ProductInfo description={product.description} />
 
-          {/* VARIANT SECTION */}
-          {product.variants?.length > 0 && (
-            <Shipping variant={variant} />
-          )}
+          <Shipping variant={variant} />
 
           {/* SUMMARY */}
           <ProductSummary
+            productId = {product.id}
             name={product.name}
             price={price}
             savings={price - discountedPrice}
             discountedPrice={discountedPrice}
+            productVariant={variant!}
           />
         </div>
       </div>
@@ -144,15 +146,19 @@ function Shipping({ variant }: { variant: Variant | null }) {
 
 
 function ProductSummary({
+  productId,
   name,
   price,
   savings,
-  discountedPrice
+  discountedPrice,
+  productVariant,
 }: {
+  productId:string;
   name: string;
   price: number;
   savings: number;
   discountedPrice: number;
+  productVariant: Variant;
 }) {
   return (
     <div className="rounded-xl border p-6 space-y-5 bg-white">
@@ -186,7 +192,10 @@ function ProductSummary({
         </div>
       )}
 
-      <AddtoCartButton/>
+      <AddtoCartButton 
+        productId = {productId}
+        productVariant={productVariant}
+        />
     </div>
   );
 }

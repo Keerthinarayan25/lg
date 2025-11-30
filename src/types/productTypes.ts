@@ -3,7 +3,7 @@ export type Variant = {
   sku: string;
   price: number;
   stock: number;
-  discount: number;        // number, not string
+  discount: number;
   unit: string;
   quantity: number;
   isDefault: boolean;
@@ -17,14 +17,9 @@ export type Variant = {
 export type Product = {
   id: string;
   name: string;
-  description?: string;
-  variants: Variant[];
-  images: string[];
-  price: number;
-  discount: number;
-  stock?: number;
+  description: string;
+  image: string[];
   category: string;
   createdAt: string;
-  rating:number;
-
+  variants?: Variant[];
 };

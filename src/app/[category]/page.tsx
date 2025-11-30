@@ -1,5 +1,4 @@
 
-import Link from "next/link";
 import SidebarFilter from "@/components/products/SidebarFilter";
 import ProductCard from "@/components/products/ProductCard";
 import { getProducts } from "@/actions/product";
@@ -42,13 +41,8 @@ export default async function ProductsPage({ params }: { params : Promise<Produc
         {/* Product Grid */}
         <div className="flex-1 grid grid-cols-3 gap-4 border rounded-md p-4 min-h-[70vh]">
           {filteredProducts.map((product:Product) => (
-            <Link
-              key={product.id}
-              href={`/${category}/${product.id}`}
-              className="block"
-            >
-              <ProductCard {...product} />
-            </Link>
+            
+            <ProductCard key={product.id} {...product} />
           ))}
         </div>
       </div>
