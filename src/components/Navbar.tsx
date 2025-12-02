@@ -29,7 +29,7 @@ export default function Navbar() {
             <Search />
             <UserSection/>
             
-            <Link href="/checkout">
+            <Link href="/cart">
               <ShoppingCart />
             </Link>
 
