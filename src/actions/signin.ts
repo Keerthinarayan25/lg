@@ -2,6 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
+import { clearGuestToken } from "@/lib/authFunctions";
 
 const API_KEY = process.env.BACKEND_API_KEY || "";
 const BACKEND_URL = process.env.BACKEND_URL || "";
@@ -81,6 +82,7 @@ Promise<{success:boolean; error?:string}> {
       path:"/",
       maxAge: 60*60*24*90,
     });
+    await clearGuestToken();
 
     return{
       success:true,

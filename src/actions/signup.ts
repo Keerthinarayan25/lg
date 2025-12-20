@@ -1,7 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { cookies } from "next/headers";
+import { getGuestToken } from "@/lib/authFunctions";
 
 const API_KEY = process.env.BACKEND_API_KEY || "";
 const BACKEND_URL = process.env.BACKEND_URL || "";
@@ -75,11 +75,8 @@ Promise<{success:boolean; error?:string}> {
       };
     }
 
-    
-    const cookieStore = await  cookies();
-
-    const guest = cookieStore.get("token");
-    if(guest){
+    const guestToken = await getGuestToken();
+    if(guestToken){
       try{
         const response = await fetch(`${BACKEND_URL}/v1/auth/merge-guest-data`,
           {
@@ -89,7 +86,7 @@ Promise<{success:boolean; error?:string}> {
               "x-customer-id": data.userId,
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ guest }),
+            body: JSON.stringify({ guestToken }),
           }
         );
         if(response.ok){
@@ -101,6 +98,7 @@ Promise<{success:boolean; error?:string}> {
           );
           
         }
+        console.log("Guest data merged successfully");
       } catch(error){
         console.error("Falied to merge guest data:",error);
       }

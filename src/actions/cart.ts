@@ -1,6 +1,7 @@
 "use server";
 
-import { getAuthUser } from "@/lib/authFunctions";
+import { buildHeaders, getAuthUser } from "@/lib/authFunctions";
+import { revalidateTag } from "next/cache";
 
 const API_KEY = process.env.BACKEND_API_KEY || "";
 const BACKEND_URL = process.env.BACKEND_URL || "";
@@ -16,14 +17,10 @@ export async function addToCart(productId: string, quantity: number, variantId: 
   console.log("Prodeuct variant is :", variantId);
 
   try {
-    const user = await getAuthUser();
+    const headers = await buildHeaders();
     const response = await fetch(`${BACKEND_URL}/v1/cart`, {
       method: "POST",
-      headers: {
-        'x-api-key': API_KEY,
-        "x-customer-id": user.id,
-        "Content-Type": "application/json",
-      },
+      headers,
       body: JSON.stringify({ productId, quantity, variantId }),
       next: {
         tags: ["cart"],
@@ -39,7 +36,8 @@ export async function addToCart(productId: string, quantity: number, variantId: 
         error: errorData.message || `Server error: ${response.status}`,
       };
     }
-
+    
+    revalidateTag("cart");
     return {
       success: true,
       message: "Item added to cart!"
@@ -62,14 +60,10 @@ export async function getCartItems() {
   }
 
   try {
-    const user = await getAuthUser();
+    const headers = await buildHeaders();
     const response = await fetch(`${BACKEND_URL}/v1/cart`, {
       method: "GET",
-      headers: {
-        'x-api-key': API_KEY,
-        "x-customer-id": user.id,
-        "Content-Type": "application/json",
-      },
+      headers,
       next: {
         tags: ["cart"],
       },

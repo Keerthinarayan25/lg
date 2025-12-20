@@ -1,4 +1,8 @@
+"use client";
+import { useRouter } from "next/navigation";
+
 export default function OrderSummary({ subtotal }: { subtotal: number }) {
+  const router = useRouter();
   return (
     <div className="bg-white rounded-xl shadow-sm p-6 space-y-6">
       {/* Totals */}
@@ -23,7 +27,7 @@ export default function OrderSummary({ subtotal }: { subtotal: number }) {
       </div>
 
       {/* Checkout Buttons */}
-      <button className="w-full bg-red-600 text-white py-3 rounded-full font-semibold hover:bg-red-700 transition">
+      <button className="w-full bg-red-600 text-white py-3 rounded-full font-semibold hover:bg-red-700 transition" onClick={()=> router.push("/checkout")}>
         Checkout
       </button>
 
