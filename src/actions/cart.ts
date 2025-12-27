@@ -26,7 +26,7 @@ export async function addToCart(productId: string, quantity: number, variantId: 
         tags: ["cart"],
       },
     });
-
+    console.log("Response in add to cart:",response);
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
 
@@ -68,6 +68,7 @@ export async function getCartItems() {
         tags: ["cart"],
       },
     });
+    console.log("response: data",response);
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
 

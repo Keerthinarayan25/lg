@@ -76,11 +76,11 @@ export async function buildHeaders(){
 
   const user = await getAuthUser();
   if(user?.id){
-    headers["x-customer-id"] = user.id;
+    headers["x-customer-id"] = String(user.id);
   }else{
     const guestToken = await getGuestToken();
     if(guestToken){
-      headers["x-guest-token"] = guestToken;
+      headers["x-guest-token"] = String(guestToken);
     }
   }
   return headers;

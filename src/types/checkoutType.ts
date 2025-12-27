@@ -1,4 +1,6 @@
 export type CheckoutFormData = {
+  get(arg0: string): unknown;
+  get(arg0: string): unknown;
   customerEmail: string;
   customerName: string;
   customerPhone: string;

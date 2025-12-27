@@ -9,7 +9,7 @@ export default function CheckoutForm() {
 
   // const isUserAuthenticated = await isAuthenticated();
 
-  const [state, formAction, isPending] = useActionState(createOrder,{
+  const [state, formAction, isPending] = useActionState(createOrder, {
     success: false,
     error: undefined,
   });
@@ -181,8 +181,9 @@ export default function CheckoutForm() {
 
         <div>
           <input type="checkbox"
+            value="true"
             {...register("sameAsBilling")}
-            onChange={(e) => handleSameAsBilling(e.target.checked)} 
+            onChange={(e) => handleSameAsBilling(e.target.checked)}
           />
           <label className="text-sm font-medium">
             Shipping address same as billing address
@@ -202,7 +203,7 @@ export default function CheckoutForm() {
                 className="w-full border rounded-md p-2"
                 placeholder="Shipping Street"
               />
-              
+
               <label className="text-sm font-medium">Shipping City</label>
               <input
                 {...register("shippingCity")}
