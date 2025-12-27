@@ -7,7 +7,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
   useInitGuestToken();
 
   return (
-    { children }
+    children 
 
   );
 }
